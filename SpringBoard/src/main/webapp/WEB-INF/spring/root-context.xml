@@ -42,8 +42,9 @@
 		  
 		<constructor-arg ref="hikariConfig"/>
 	</bean>
-	<!--DataSource -  디비연결 정보 객체(CP)-->
 	
+	
+	<!--DataSource -  디비연결 정보 객체(CP)-->
 	
 	
 	<!-- SqlSessionFactory - 디비연결, sql처리, mybatis설정-->
@@ -52,14 +53,11 @@
 		 <property name="dataSource" ref="dataSource"/>
 <!-- 		 <property name="configLocation"  -->
 <!-- 		 		   value="classpath:/mybatis-config.xml" />	 -->
-<!-- 		 <property name="mapperLocations"  -->
-<!-- 		 	       value="classpath:/mappers/**/*Mapper.xml" />		    -->
+		 <property name="mapperLocations" 
+		 	       value="classpath:/mappers/**/*Mapper.xml" />		   
 	
 	</bean>
 	<!-- SqlSessionFactory - 디비연결, sql처리, mybatis설정-->
-	
-	
-	
 	
 	
 	<!-- SqlSession - 디비연결(자동), sql생성, mybatis설정가능,자원해제 -->
