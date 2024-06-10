@@ -12,4 +12,10 @@
 
 <input type="button" value="버튼" class="btn-lg btn-success">
 
-<%@ include file="include/header.jsp" %>
+<div class="col-md-6">
+<button type="button" class="btn btn-primary btn-block"><i class="fa fa-bell"></i> 로그인</button>
+<button type="button" class="btn btn-info btn-block btn-flat"><i class="fa fa-bell"></i>구글 계정 로그인</button>
+<button type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-bell"></i>카카오톡 계정 로그인</button>
+</div>
+
+<%@ include file="include/footer.jsp" %>
