@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -74,6 +76,35 @@ public class BoardController {
 		model.addAttribute("boardList", boardList);
 		
 		return"/board/list";
+	}
+	
+	
+	//게시판 본문보기 - readGET 
+	@GetMapping(value = "/read")
+	public void readGET(@ModelAttribute("bno") int bno, Model model) throws Exception {
+	//@ModelAttribute("bno") int bno
+	//=> 주소줄에 있는 데이터를 가져와서 사용하고, 바로 연결된 뷰페이지로 이동${bno}
+	//=> 객체를 저장 -> 1:N 관계(N - been(객체), collection)
+		
+	//@RequestParam)("bno") int bno
+	//=> request.getParameter("bno") 동일함, 자동 형변환이 포함(문자,숫자,날짜)
+	//=>1:1 관계에서 사용	
+		logger.debug("readGET() 실행");
+		// 전달정보 저장
+		logger.debug("bno :"+bno);
+		
+		//글 조회(읽음) 카운트 증가 => 조회수 1증가
+		bService.updateReadCnt(bno);
+		
+		//서비스 - DAO 저장된 정보 가져오기
+		BoardVO resultVO = bService.getBoard(bno);
+		logger.debug("resultVO : {} "+ resultVO);
+		
+		//전달할 정보를 뷰페이지에 저장(model객체)
+		//연결된 뷰페이지이동
+		model.addAttribute("resultVO", resultVO);
+		 
+		
 	}
 	
 	
