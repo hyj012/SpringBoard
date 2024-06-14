@@ -1,5 +1,7 @@
 package com.itwillbs.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -25,6 +27,16 @@ public class BoardServiceImpl implements BoardService {
 		bdao.create(vo);
 		
 	}
+
+	
+	@Override
+	public List<BoardVO> listALL() throws Exception {
+		logger.debug("게시판 목록 조회");
+		
+		return bdao.listALL();
+	}
+	
+	
 
 	
 	

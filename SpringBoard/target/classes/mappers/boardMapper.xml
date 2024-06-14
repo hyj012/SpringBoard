@@ -12,6 +12,15 @@
  	values(#{title},#{content},#{writer})
   </insert>
   
+  <!-- 글 목록 조회 -->
+  <!--mybatis-config.xml에 패키지명 안 써도 되게 설정해줌  -->
+  <select id="listALL" resultType="BoardVO">
+  	select * from tbl_board
+  </select>
+  
+  
+  
+  
   
   
   </mapper>
