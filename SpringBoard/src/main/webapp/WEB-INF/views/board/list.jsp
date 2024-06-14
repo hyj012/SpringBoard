@@ -54,16 +54,16 @@
 
 
 <!-- 모달창 -->
-<div class="modal fade in" id="myModal" style="display: block; padding-right: 17px;">
+<div class="modal fade" id="modal-default" style="display: none;">
 <div class="modal-dialog">
 <div class="modal-content">
 <div class="modal-header">
 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 <span aria-hidden="true">×</span></button>
-<h4 class="modal-title">아이티윌 게시판</h4>
+<h4 class="modal-title">Default Modal</h4>
 </div>
 <div class="modal-body">
-<p>확인할 내용정보</p>
+<p>One fine body…</p>
 </div>
 <div class="modal-footer">
 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
@@ -90,10 +90,10 @@ $(document).ready(function(){
 	
 	if(result == "createOk"){
 // 		alert("글쓰기 완료! 리스트 페이지로 이동!")
+		$('#myModal').modal("show");
 	}
-// 		$('#myModal').modal("show");
 	
-// 	Swal.fire("아이티윌 테스트@");
+	Swal.fire("아이티윌 테스트@");
 	
 });
 
