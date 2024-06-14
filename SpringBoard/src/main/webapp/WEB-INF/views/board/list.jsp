@@ -5,6 +5,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <h1>게시판 목록</h1>
 <h2>${boardList.size() }</h2>
 <%-- ${boardList } --%>
@@ -15,8 +17,8 @@
 <div class="box-header with-border">
 <h3 class="box-title">게시판 리스트(ALL)</h3>
 </div>
-
-<div class="box-body">
+</div>
+<div class="box-body"></div>
 <table class="table table-bordered">
 <tbody><tr>
 <th style="width: 10px">bno</th>
@@ -47,18 +49,34 @@
 
 </tbody>
 </table>
+
+
+
+
+<!-- 모달창 -->
+<div class="modal fade in" id="myModal" style="display: block; padding-right: 17px;">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">×</span></button>
+<h4 class="modal-title">아이티윌 게시판</h4>
+</div>
+<div class="modal-body">
+<p>확인할 내용정보</p>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+<button type="button" class="btn btn-primary">Save changes</button>
+</div>
 </div>
 
-<div class="box-footer clearfix">
-<ul class="pagination pagination-sm no-margin pull-right">
-<li><a href="#">«</a></li>
-<li><a href="#">1</a></li>
-<li><a href="#">2</a></li>
-<li><a href="#">3</a></li>
-<li><a href="#">»</a></li>
-</ul>
 </div>
+
 </div>
+
+
+
 
 <!-- Jquery사용 -->
 <script>
@@ -71,9 +89,11 @@ $(document).ready(function(){
 	var result = "${msg}";
 	
 	if(result == "createOk"){
-		alert("글쓰기 완료! 리스트 페이지로 이동!")
+// 		alert("글쓰기 완료! 리스트 페이지로 이동!")
 	}
+// 		$('#myModal').modal("show");
 	
+// 	Swal.fire("아이티윌 테스트@");
 	
 });
 
