@@ -21,5 +21,7 @@ public interface BoardService {
 	//특정 bno 글정보 수정하기
 	public void updateBoard(BoardVO vo) throws Exception;
 	
+	//특정 글 정보 삭제
+	public void deleteBoard(int bno)throws Exception; 
 	
 }

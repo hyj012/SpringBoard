@@ -70,6 +70,14 @@ $(document).ready(function(){
 		
 	});
 	
+	
+	//삭제버튼 눌렀을때
+	$(".btn-warning").click(function(){
+		$("form[role='form']").attr("action","/board/delete");
+		$("form[role='form']").submit();
+	});
+	
+	
 	//리스트 버튼 클릭시 리스트 페이지로 이동
 	$(".btn-primary").click(function(){
 		alert("클릭!");	
