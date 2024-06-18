@@ -20,7 +20,10 @@ public interface BoardDAO {
 	// 특정 bno의 글정보 가져오기
 		public BoardVO getBoard(int bno) throws Exception;
 	
-	//
+	//특정 글 정보 수정하기
 	public void UpdateBoard(BoardVO vo)throws Exception; 	
+	//특정 글 정보 삭제
+	public void deleteBoard(int bno)throws Exception; 
+	
 		
 }

@@ -151,5 +151,25 @@ public class BoardController {
 	
 	
 	
+	//게시판 글 삭제- POST
+	@PostMapping(value = "/delete")
+	public String deletePOST(BoardVO vo, @RequestParam("bno")int bno, RedirectAttributes rttr)throws Exception {
+		logger.debug("deletePOST() 실행");
+		
+		logger.debug("삭제할 글 번호 :{}",bno);
+		//서비스 - DAO 글 삭제 동작
+		bService.deleteBoard(bno);;
+		
+		//전달정보 저장
+		rttr.addFlashAttribute("msg", "deleteOK");
+		
+		//삭제 후 페이지 이동
+		return "redirect:/board/listALL";
+		
+		
+	}
+	
+	
+	
 	
 }

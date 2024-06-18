@@ -61,6 +61,16 @@ public class BoardServiceImpl implements BoardService {
 		bdao.UpdateBoard(vo);
 		
 	}
+
+	//특정 글정보 삭제
+	@Override
+	public void deleteBoard(int bno) throws Exception {
+		logger.debug("deleteBoard(BoardVO vo) 실행");
+		bdao.deleteBoard(bno);
+		
+	}
+	
+	
 	
 	
 	
