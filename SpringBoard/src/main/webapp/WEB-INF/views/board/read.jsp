@@ -11,7 +11,7 @@
 		<h3 class="box-title">/board/read.jsp</h3>
 	</div>
 		
-		<form action="" method="post">
+		<form role="form" action="" method="post">
 <%-- 			<input type="text" name="bno" value="${resultVO.bno}"> --%>
 			<input type="hidden" name="bno" value="${param.bno}"> <!-- 주소에 있는 bno=? 가져올때 -->
 			
@@ -62,9 +62,10 @@ $(document).ready(function(){
 		//alert("수정버튼 클릭!");
 		//수정페이지로 이동(+bno)
 		//attr()함수는 속성을 바꿔준다.
-		$("form").attr("action","/board/modify");
-		$("form").attr("method","GET");
-		$("form").submit();
+// 		$("form").attr(); -> 모든 폼 속성을 바꿈
+		$("form[role='form']").attr("action","/board/modify");
+		$("form[role='form']").attr("method","GET");
+		$("form[role='form']").submit();
 		
 		
 	});

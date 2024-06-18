@@ -52,6 +52,16 @@ public class BoardServiceImpl implements BoardService {
 		
 		return bdao.getBoard(bno);
 	}
+
+	
+	//특정 bno 글정보 수정
+	@Override
+	public void updateBoard(BoardVO vo) throws Exception {
+		logger.debug("updateBoard(BoardVO vo) 실행");
+		bdao.UpdateBoard(vo);
+		
+	}
+	
 	
 	
 	
