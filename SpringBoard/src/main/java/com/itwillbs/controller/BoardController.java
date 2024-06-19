@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itwillbs.domain.BoardVO;
+import com.itwillbs.domain.Criteria;
 import com.itwillbs.service.BoardService;
 
 @Controller
@@ -158,15 +159,35 @@ public class BoardController {
 		
 		logger.debug("삭제할 글 번호 :{}",bno);
 		//서비스 - DAO 글 삭제 동작
-		bService.deleteBoard(bno);;
+		bService.deleteBoard(bno);
 		
-		//전달정보 저장
+		//전달정보 저장 - (메세지 박스 ex글삭제완료! )
 		rttr.addFlashAttribute("msg", "deleteOK");
 		
 		//삭제 후 페이지 이동
 		return "redirect:/board/listALL";
 		
 		
+	}
+	
+	
+	//http://localhost:8088/board/listPage
+	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
+	public String listPageGET(Criteria cri, Model model) throws Exception {
+		logger.debug("listPageGET() 실행");
+		//페이징처리 정보 객체 - > 매개변수에 Criteria cri을 주면 밑에 코드와 동일(Criteria클래스의 생성자때문에)
+//		Criteria cri = new Criteria();
+//		cri.setPage(1);
+//		cri.setPageSize(10);
+		
+		//서비스의 정보를 통해서 -> DB의 정보를 가져오기(controller역할)
+		List<BoardVO> boardList = bService.listPage(cri);
+		logger.debug("size :"+boardList.size());
+		
+		//연결된 view페이지로 정보 전달(controller역할)
+		model.addAttribute("boardList", boardList);
+		
+		return"/board/list";
 	}
 	
 	
