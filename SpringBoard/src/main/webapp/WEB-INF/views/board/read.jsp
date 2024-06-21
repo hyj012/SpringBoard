@@ -14,6 +14,8 @@
 		<form role="form" action="" method="post">
 <%-- 			<input type="text" name="bno" value="${resultVO.bno}"> --%>
 			<input type="hidden" name="bno" value="${param.bno}"> <!-- 주소에 있는 bno=? 가져올때 -->
+			<input type="hidden" name="pageSize" value="${cri.pageSize}">
+			<input type="hidden" name="page" value="${cri.page}">
 			
 		</form>
 
@@ -81,13 +83,15 @@ $(document).ready(function(){
 	//리스트 버튼 클릭시 리스트 페이지로 이동
 	$(".btn-primary").click(function(){
 		alert("클릭!");	
-		location.href='/board/listALL';
+		location.href='/board/listPage?page=${cri.page}';
+// 		location.href='/board/listPage?page=${param.page}';
 	});
 	
 });
 
 </script>
 
+${cri}
 
 
 <%@ include file="../include/footer.jsp"%>

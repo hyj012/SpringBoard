@@ -11,7 +11,9 @@
 		<h3 class="box-title">/board/modify.jsp</h3>
 	</div>
 		
-		<form action="" method="post">
+		<form role="form" method="post">
+ 		
+ 		<input type="hidden" name="page" value="${param.page} ">	
  			
 		<div class="box-body">
 			<div class="form-group">

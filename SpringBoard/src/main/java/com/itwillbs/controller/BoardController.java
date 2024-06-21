@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itwillbs.domain.BoardVO;
 import com.itwillbs.domain.Criteria;
+import com.itwillbs.domain.PageVO;
 import com.itwillbs.service.BoardService;
 
 @Controller
@@ -56,7 +57,7 @@ public class BoardController {
 		rttr.addFlashAttribute("msg", "createOK");
 		
 		//페이지 이동
-		return"redirect:/board/listALL";
+		return"redirect:/board/listPage";
 		//RedirectAttributes 리다이렉트 쓸때만 사용할 수 있음.
 //		return"/board/list";
 		
@@ -84,7 +85,7 @@ public class BoardController {
 	
 	//게시판 본문보기 - readGET 
 	@GetMapping(value = "/read")
-	public void readGET(@ModelAttribute("bno") int bno, Model model) throws Exception {
+	public void readGET(Criteria cri, @ModelAttribute("bno") int bno, Model model) throws Exception {
 	//@ModelAttribute("bno") int bno
 	//=> 주소줄에 있는 데이터를 가져와서 사용하고, 바로 연결된 뷰페이지로 이동${bno}
 	//=> 객체를 저장 -> 1:N 관계(N - been(객체), collection)
@@ -104,8 +105,9 @@ public class BoardController {
 		logger.debug("resultVO : {} "+ resultVO);
 		
 		//전달할 정보를 뷰페이지에 저장(model객체)
-		//연결된 뷰페이지이동
 		model.addAttribute("resultVO", resultVO);
+		model.addAttribute("cri", cri);
+		//연결된 뷰페이지이동
 		 
 		
 	}
@@ -132,7 +134,7 @@ public class BoardController {
 	
 	//게시판 글 수정하기(글정보 수정) - POST
 	@PostMapping(value = "/modify")
-	public String modifyPOST(BoardVO vo, RedirectAttributes rttr) throws Exception{
+	public String modifyPOST(Criteria cri, BoardVO vo, RedirectAttributes rttr) throws Exception{
 		// RedirectAttributes반드시 redirect할때만 사용가능
 		logger.debug("modifyPOST() 실행");
 		
@@ -144,17 +146,20 @@ public class BoardController {
 		
 		//상태 정보 전달
 		rttr.addFlashAttribute("msg", "updateOK"); //=>jsp페이지에서 var result = "${msg}";
+		//rttr.addFlashAttribute("page", cri.getPage()); (X) request영역에 저장
+		rttr.addAttribute("page",cri.getPage());
 		
 		//페이지 이동(listALL)
 		
-		return"redirect:/board/listALL";
+//		return"redirect:/board/listALL";
+		return"redirect:/board/listPage";
 	}
 	
 	
 	
 	//게시판 글 삭제- POST
 	@PostMapping(value = "/delete")
-	public String deletePOST(BoardVO vo, @RequestParam("bno")int bno, RedirectAttributes rttr)throws Exception {
+	public String deletePOST(Criteria cri, BoardVO vo, @RequestParam("bno")int bno, RedirectAttributes rttr)throws Exception {
 		logger.debug("deletePOST() 실행");
 		
 		logger.debug("삭제할 글 번호 :{}",bno);
@@ -163,9 +168,11 @@ public class BoardController {
 		
 		//전달정보 저장 - (메세지 박스 ex글삭제완료! )
 		rttr.addFlashAttribute("msg", "deleteOK");
+		rttr.addAttribute("page", cri.getPage());
 		
 		//삭제 후 페이지 이동
-		return "redirect:/board/listALL";
+		//return "redirect:/board/listALL";
+		return "redirect:/board/listPage";
 		
 		
 	}
@@ -184,8 +191,15 @@ public class BoardController {
 		List<BoardVO> boardList = bService.listPage(cri);
 		logger.debug("size :"+boardList.size());
 		
+		//하단 페이징처리 정보
+		PageVO pageVO = new PageVO();
+		pageVO.setCri(cri);
+//		pageVO.setTotalCount(65536);
+		pageVO.setTotalCount(bService.getTotalCount());
+		
 		//연결된 view페이지로 정보 전달(controller역할)
 		model.addAttribute("boardList", boardList);
+		model.addAttribute("pageVO", pageVO);
 		
 		return"/board/list";
 	}
