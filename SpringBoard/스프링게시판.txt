@@ -55,3 +55,36 @@
 		  <qualifier value="da2"/>
 	</bean>	  
 			
+			
+			
+			
+	//하단 페이징처리
+	
+	- 시작페이지 번호(startPage)
+		startPage = (endPage - 블럭개수) +1
+	- 끝페이지 번호(endPage)
+		endPage = (int) (올림(페이지번호/블럭개수) * 블럭개수)
+		
+		=> 추가변경(글 총 개수 < 끝 페이지)
+		진짜endPage = 올림(전체 글의 개수/페이지 출력)
+		
+	- 전체 글의 개수(DB조회 - count())
+	- 이전 페이지(prev)
+		prev =  strartPage ==1? false:trune;
+		prev = startPage !=1;
+	
+	- 다음 페이지
+		next = endPage * 페이징당 출력 >= 전체 글개수? false :true};
+		next =endPage * 페이징당 출력 < 전체 글개수;
+	
+	** 총 123개 /페이지당 10개씩 출력
+	   총 페이지 13 / 페이지 블럭 10개
+	   
+	- 3페이지
+	=> startPage :	1, endPage : 10, next:o, prev:X
+	- 10페이지	
+	=> startPage :	1, endPage : 10, next:o, prev:X
+	- 12페이지
+	=> statrPage : 11, endPage : 20->13, next:x, prev:o		
+	- 13페이지
+	=> statrPage : 11, endPage :20-> 13, next:x, prev:o		

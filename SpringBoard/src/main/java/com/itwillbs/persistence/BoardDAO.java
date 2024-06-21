@@ -3,6 +3,7 @@ package com.itwillbs.persistence;
 import java.util.List;
 
 import com.itwillbs.domain.BoardVO;
+import com.itwillbs.domain.Criteria;
 
 public interface BoardDAO {
 	
@@ -18,12 +19,24 @@ public interface BoardDAO {
 	public void updateReadCnt(int bno) throws Exception;
 	
 	// 특정 bno의 글정보 가져오기
-		public BoardVO getBoard(int bno) throws Exception;
+	public BoardVO getBoard(int bno) throws Exception;
 	
 	//특정 글 정보 수정하기
-	public void UpdateBoard(BoardVO vo)throws Exception; 	
+	public void UpdateBoard(BoardVO vo)throws Exception;
+	
 	//특정 글 정보 삭제
 	public void deleteBoard(int bno)throws Exception; 
+	
+	//페이징처리
+	public List<BoardVO> listPage(int page) throws Exception;
+	
+	public List<BoardVO> listPage(Criteria cri) throws Exception;
+	
+	//게시판 총 글 개수
+	public int getTotalCount() throws Exception;
+	
+	
+	
 	
 		
 }

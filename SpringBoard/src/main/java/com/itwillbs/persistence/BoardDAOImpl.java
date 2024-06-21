@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.itwillbs.domain.BoardVO;
+import com.itwillbs.domain.Criteria;
 
 //하나의 빈의 객체로 등록돼서 외부에서 사용할 수 있도록 해준다.
 @Repository
@@ -72,6 +73,41 @@ public class BoardDAOImpl implements BoardDAO {
 		sqlSession.delete(NAMESPACE+"deleteBoard", bno);
 		
 	}
+
+
+	@Override
+	public List<BoardVO> listPage(int page) throws Exception {
+		logger.debug("listPage(int bno) 실행");
+		//페이징 처리정보 계산
+		//1p(0~9번) 2p(10~19번) 3p(20~29번)...
+		if(page <= 0) {
+			page = 1;
+		}
+		page =(page-1)*10; 
+		
+		
+		return sqlSession.selectList(NAMESPACE+"listPage",page );
+	}
+
+
+	@Override
+	public List<BoardVO> listPage(Criteria cri) throws Exception {
+		logger.debug("listPage(Criteria cris) 실행");
+		
+		
+		return sqlSession.selectList(NAMESPACE+"listPage2", cri);
+	}
+
+
+	@Override
+	public int getTotalCount() throws Exception {
+		logger.debug("getTotalCount()호출");
+		return sqlSession.selectOne(NAMESPACE+"totalCount");
+	}
+	
+	
+	
+	
 	
 	
 	
